@@ -12,10 +12,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body>
+<body class="bg-gray-500">
     <!-- Header Content -->
     <header>
-        <h1 class="text-2xl font-bold pb-8">Todo List - Felia</h1>
+        <h1 class="text-gray-900 text-3xl font-bold pb-8">Todo List - Felia</h1>
     </header>
         
     <!-- Main Content -->
@@ -24,40 +24,59 @@
         <section>
             <form>
                  <!-- Todo Input -->
-                <input class="border p-2 rounded" type="text" id="todo-input" placeholder="Enter a new todo item">
+                <input class="text-gray-300 bg-gray-700 border p-2 rounded" type="text" id="todo-input" placeholder="Enter a new todo item">
 
                  <!-- Date Input -->
-                <input class="border p-2 rounded" type="date" id="todo-date" placeholder="Enter due date">
+                <input class="text-gray-300 bg-gray-700 border p-2 rounded" type="date" id="todo-date" placeholder="Enter due date">
              </form>
             
             <!-- Add Button -->
-            <button class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600" onclick="addTodo()" type="button">Add Todo</button>
+            <button class="border-2 border-gray-300 bg-gray-600 text-white p-2 rounded hover:bg-blue-900" onclick="addTodo()" type="button">Add Todo</button>
         </section>
 
         <!-- Action Section -->
         <section class="flex pt-2 justify-between">
             <!-- Clear All Button -->
-            <button class="border rounded p-2 bg-red-500 text-white" onclick="deleteAllTodos()">Clear All Todos</button>
+            <button class="border-2 border-red-700 rounded p-2 bg-red-500 text-white hover:bg-red-700" onclick="deleteAllTodos()">Clear All Todos</button>
 
             <!-- Filter Options -->
-            <button class="border rounded p-2 bg-blue-500 text-white">Filter Todos</button>
+            <select class="border-2 border-gray-300 bg-gray-600 hover:bg-blue-900 rounded text-white" onchange="filterByMonth(this.value)">
+                 <option value="all">All Months</option>
+                 <option value="0">January</option>
+                 <option value="1">February</option>
+                 <option value="2">March</option>
+                 <option value="3">April</option>
+                 <option value="4">May</option>
+                 <option value="5">June</option>
+                 <option value="6">July</option>
+                 <option value="7">August</option>
+                 <option value="8">September</option>
+                 <option value="9">October</option>
+                 <option value="10">November</option>
+                 <option value="11">December</option>
+            </select>
         </section>
 
         <!-- Todo List Section -->
         <section class="pt-2">
-            <header>
-                <h1 class="text-2xl font-semibold">List of Todos</h1>
-            </header>
-
-            <ul class="pt-2" id="todo-list">
-                <!-- Todo items will be dynamically added here -->
-                <li>No Todos Available</li>
-            </ul>
+            <table class="bg-gray-700 border-2 border-gray-300 auto" style="width: 100%;">
+                <thead>
+                    <tr>
+                     <th class="text-left text-gray-300 text-xl">Task</th>
+                     <th class="text-right text-gray-300 text-xl">Due Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                     <td id="todo-list" class="border-2 border-gray-300 pt-2 pb-2 text-center text-gray-400" colspan="4">No task found</td>
+                    </tr>
+                </tbody>
+            </table>
     </main>
 
     <!-- Footer Content -->
     <footer class="pt-8">
-        <p class="text-center text-gray-500">© 2026 Felia's Todo List App</p>
+        <p class="text-center text-gray-900">© 2026 Felia's Todo List App</p>
     </footer>
 
     <!-- Javascript External -->

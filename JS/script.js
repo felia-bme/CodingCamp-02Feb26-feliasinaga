@@ -8,12 +8,12 @@ function addTodo() {
 
     // Simple validation to check if inputs are filled (both of them)
     if (todoInput.value.trim() === '' || todoDate.value === '') {
-        alert('Please enter both a todo item and a date.')
+        alert('Please enter both a todo item and due date.')
     } else {
         // Create a new todo object
         const newTodo = {
             todo: todoInput.value.trim(),
-            date: todoDate.value
+            date: todoDate.value,
         };
         //Add the new todo to the todos array
         todos.push(newTodo);
@@ -27,19 +27,33 @@ function addTodo() {
     }
 }
 
-///Function to render todos items on the DOM
-function renderTodos() {
-    const todolist = document.getElementById('todo-list');
+function filterByMonth(month) {
+  if (month === "all") {
+    renderTodos(todos);
+    return;
+  }
 
-    //Clear existing list
-    todolist.innerHTML = '';
+  const filtered = todos.filter(item => {
+    const itemMonth = new Date(item.date).getMonth();
+    return itemMonth === Number(month);
+  });
 
-    //Render each todo item item
-    todos.forEach((item, _) => {
+  renderTodos(filtered);
+}
+
+function renderTodos(list = todos) {
+  const todolist = document.getElementById('todo-list');
+  todolist.innerHTML = '';
+
+  if (list.length === 0) {
+    todolist.innerHTML = "No task found";
+    return;
+  }
+
+  list.forEach((item, _) => {
         todolist.innerHTML +=
-        `<li>
-            <p class="text-2xl">${item.todo} <span class="text-sm text-gray-500"> ${item.date} </span></p>
-            <hr />
+        `<li class="text-gray-300">
+            <p class="text-left text-gray-300 font-semibold">${item.todo} <span class="float-right text-sm text-gray-400"> ${item.date} </span></p>
         </li>`;
     });
 }
@@ -52,7 +66,3 @@ function deleteAllTodos() {
 }
 
 
-//Function to filter todo items (to be implemented)
-function markAsCompleted() {
-    //To be implemented
-}
